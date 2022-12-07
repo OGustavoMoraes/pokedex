@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "pk";
+  src: url(./PocketMonk-15ze.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.tudo {
+  display: flex;
+  background-image: url(./fundo.png);
+  background-size: cover;
+  color: rgb(255, 251, 0);
+  justify-content: center;
+  font-family: "pk";
+  font-size: xx-large;
+}
+
+.img {
+  margin-left: 15%;
+}

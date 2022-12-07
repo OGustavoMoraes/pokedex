@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>POKEDEX FIRST GN</title>
+  </head>
+  <body class="tudo">
+    <div class="container">
+      <img class="img" src="./logo.png" />
+      <label for="cep"></label>
+      <select id="cep">
+        <option value="charmander">CHARMANDER</option>
+        <option value="charmeleon">CHARMELEON</option>
+        <option value="charizard">CHARIZARD</option>
+        <option value="squirtle">SQUIRTLE</option>
+        <option value="wartortle">WARTORTLE</option>
+        <option value="blastoise">BLASTOISE</option>
+        <option value="bulbasaur">BULBASAUR</option>
+        <option value="ivysaur">IVYSAUR</option>
+        <option value="venusaur">VENUSAUR</option>
+        <option value="pikachu">PIKACHU</option>
+        <option value="raichu">RAICHU</option>
+        <option value="growlithe">GROWLITHE</option>
+        <option value="arcanine">ARCANINE</option>
+        <option value="abra">ABRA</option>
+        <option value="kadabra">KADABRA</option>
+        <option value="alakazam">ALAKAZAM</option>
+        <option value="magikarp">MAGIKARP</option>
+        <option value="gyarados">GYARADOS</option>
+        <option value="dratini">DRATINI</option>
+        <option value="dragonair">DRAGONAIR</option>
+        <option value="dragonite">DRAGONITE</option>
+        <option value="omanyte">OMANYTE</option>
+        <option value="omastar">OMASTAR</option>
+        <option value="kabuto">KABUTO</option>
+        <option value="kabutops">KABUTOPS</option>
+        <option value="aerodactyl">AERODACTYL</option>
+        <option value="snorlax">SNORLAX</option>
+        <option value="lapras">LAPRAS</option>
+        <option value="rhyhorn">RHYHORN</option>
+        <option value="rhydon">RHYDON</option>
+        <option value="kangaskhan">KANGASKHAN</option>
+        <option value="drowzee">DROWZEE</option>
+        <option value="hypno">HYPNO</option>
+        <option value="articuno">ARTICUNO</option>
+        <option value="zapdos">ZAPDOS</option>
+        <option value="moltres">MOLTRES</option>
+      </select>
+      <input type="button" value="Enviar" id="enviar" /><br />
+      <div id="mostra"></div>
+    </div>
+  </body>
+
+  <script>
+    document.querySelector("#enviar").addEventListener("click", consulta);
+
+    async function consulta() {
+      let cep = document.querySelector("#cep").value;
+      const url = "https://pokeapi.co/api/v2/pokemon/" + cep;
+      try {
+        let resposta = await fetch(url);
+        let js = await resposta.json();
+        mostraDados(js);
+      } catch {
+        console.log(err);
+      }
+    }
+    function mostraDados(js) {
+      const painel = document.querySelector("#mostra");
+      let texto = "<h1>DADOS POKEMON:</h1>";
+      texto = texto + "Nome: " + js.species.name + "<br>";
+      texto = texto + "Status base: " + js.stats[0].base_stat + "<br>";
+      texto =
+        texto +
+        "Habilidades: " +
+        js.abilities[0].ability.name +
+        " e " +
+        js.abilities[1].ability.name +
+        "<br>";
+
+      texto = texto + "Tipo: " + js.types[0].type.name + "<br>";
+      texto =
+        texto +
+        "Principais Moves: " +
+        js.moves[0].move.name +
+        ", " +
+        js.moves[1].move.name +
+        " e " +
+        js.moves[2].move.name +
+        "<br>";
+      painel.innerHTML = texto;
+    }
+  </script>
+</html>
